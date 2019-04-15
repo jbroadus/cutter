@@ -91,6 +91,12 @@ DisassemblerGraphView::DisassemblerGraphView(QWidget *parent)
     QShortcut *shortcut_prev_instr = new QShortcut(QKeySequence(Qt::Key_K), this);
     shortcut_prev_instr->setContext(Qt::WidgetShortcut);
     connect(shortcut_prev_instr, SIGNAL(activated()), this, SLOT(prevInstr()));
+
+    // Find shortcut
+    QShortcut *shortcut_find = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_F), this);
+    shortcut_find->setContext(Qt::WidgetShortcut);
+    connect(shortcut_find, SIGNAL(activated()), this, SLOT(find()));
+    
     shortcuts.append(shortcut_disassembly);
     shortcuts.append(shortcut_escape);
     shortcuts.append(shortcut_zoom_in);
@@ -98,6 +104,7 @@ DisassemblerGraphView::DisassemblerGraphView(QWidget *parent)
     shortcuts.append(shortcut_zoom_reset);
     shortcuts.append(shortcut_next_instr);
     shortcuts.append(shortcut_prev_instr);
+    shortcuts.append(shortcut_find);
 
     // Export Graph menu
     mMenu->addSeparator();
@@ -124,6 +131,13 @@ DisassemblerGraphView::DisassemblerGraphView(QWidget *parent)
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setAlignment(Qt::AlignTop);
     layout->addWidget(header);
+
+    spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    layout->addItem(spacer);
+
+    findTextWidget = new FindTextWidget();
+    findTextWidget->hide();
+    layout->addWidget(findTextWidget);
 
     prepareHeader();
 
@@ -809,6 +823,16 @@ void DisassemblerGraphView::copySelection()
 
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(highlight_token->content);
+}
+
+void DisassemblerGraphView::find()
+{
+    QString text;
+    if (highlight_token) {
+        findTextWidget->start_find(highlight_token->content);
+    } else {
+        findTextWidget->show();
+    }
 }
 
 DisassemblerGraphView::Token *DisassemblerGraphView::getToken(Instr *instr, int x)

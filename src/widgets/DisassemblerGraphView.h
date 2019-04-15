@@ -7,8 +7,10 @@
 #include <QPainter>
 #include <QShortcut>
 #include <QLabel>
+#include <QSpacerItem>
 
 #include "widgets/GraphView.h"
+#include "widgets/FindTextWidget.h"
 #include "menus/DisassemblyContextMenu.h"
 #include "common/RichTextPainter.h"
 #include "common/CutterSeekable.h"
@@ -100,6 +102,8 @@ public:
     void loadCurrentGraph();
     QString windowTitle;
     QTextEdit *header = nullptr;
+    QSpacerItem *spacer = nullptr;
+    FindTextWidget *findTextWidget = nullptr;
 
     int getWidth() { return width; }
     int getHeight() { return height; }
@@ -124,6 +128,8 @@ public slots:
     void prevInstr();
 
     void copySelection();
+
+    void find();
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;

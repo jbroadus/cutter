@@ -260,6 +260,7 @@ SOURCES += \
     widgets/Dashboard.cpp \
     widgets/EntrypointWidget.cpp \
     widgets/ExportsWidget.cpp \
+    widgets/FindTextWidget.cpp \
     widgets/FlagsWidget.cpp \
     widgets/FunctionsWidget.cpp \
     widgets/ImportsWidget.cpp \
@@ -376,6 +377,7 @@ HEADERS  += \
     widgets/Dashboard.h \
     widgets/EntrypointWidget.h \
     widgets/ExportsWidget.h \
+    widgets/FindTextWidget.h \
     widgets/FlagsWidget.h \
     widgets/FunctionsWidget.h \
     widgets/ImportsWidget.h \
@@ -487,6 +489,7 @@ FORMS    += \
     widgets/EntrypointWidget.ui \
     widgets/FlagsWidget.ui \
     widgets/ExportsWidget.ui \
+    widgets/FindTextWidget.ui \
     widgets/FunctionsWidget.ui \
     widgets/ImportsWidget.ui \
     widgets/RelocsWidget.ui \
